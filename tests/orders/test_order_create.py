@@ -1,11 +1,13 @@
 import pytest
 import requests
 import json
+import allure
 from data import UserData
 
 
 class TestOrderCreate:
 
+    @allure.title('Проверка создания заказа самокатов разного цвета')
     @pytest.mark.parametrize('color', ["BLACK", "GREY", "BLACK, GREY", ""])
     def test_order_creation(self, color):
         payload = {

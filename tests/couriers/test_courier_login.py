@@ -1,8 +1,10 @@
 import requests
+import allure
 
 
 class TestCourierLogin:
 
+    @allure.title('Проверка входа в систему существующего курьера')
     def test_login_existing_courier(self, register_new_courier_and_return_login_password):
         courier_data = register_new_courier_and_return_login_password
         payload = {
@@ -13,6 +15,7 @@ class TestCourierLogin:
         assert response.status_code == 200
         assert "id" in response.text
 
+    @allure.title('Проверка входа в систему несуществующего курьера')
     def test_login_non_existing_courier(self, generate_and_return_login_password_without_registration):
         courier_data = generate_and_return_login_password_without_registration
         payload = {
@@ -23,6 +26,7 @@ class TestCourierLogin:
         assert response.status_code == 404
         assert response.text == '{"code":404,"message":"Учетная запись не найдена"}'
 
+    @allure.title('Проверка входа в систему курьера без указания пароля')
     def test_login_courier_without_password(self, register_new_courier_and_return_login_password):
         courier_data = register_new_courier_and_return_login_password
         payload = {

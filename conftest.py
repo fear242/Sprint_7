@@ -3,9 +3,11 @@ import pytest
 import requests
 import random
 import string
+import allure
 from data import UserData
 
 
+@allure.title('Генерирование и возврат учётных данных курьера')
 @pytest.fixture()
 def generate_and_return_login_password_without_registration():
 
@@ -27,6 +29,7 @@ def generate_and_return_login_password_without_registration():
     requests.delete('https://qa-scooter.praktikum-services.ru/api/v1/courier/:id', data=payload)
 
 
+@allure.title('Регистрация курьера и возврат его данных')
 @pytest.fixture()
 def register_new_courier_and_return_login_password():
 
@@ -58,6 +61,7 @@ def register_new_courier_and_return_login_password():
     requests.delete('https://qa-scooter.praktikum-services.ru/api/v1/courier/:id', data=payload)
 
 
+@allure.title('Создание заказа и возврат айди')
 @pytest.fixture()
 def create_order_return_id():
     payload = {
@@ -79,6 +83,7 @@ def create_order_return_id():
     return order
 
 
+@allure.title('Создание заказа и возврат трек-номера')
 @pytest.fixture()
 def create_order_return_track():
     payload = {
@@ -98,6 +103,7 @@ def create_order_return_track():
     return track
 
 
+@allure.title('Создание, логин курьера и возврат его айди')
 @pytest.fixture()
 def create_and_login_courier_return_id():
     def generate_random_string(length):
